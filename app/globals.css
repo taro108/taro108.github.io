@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #0f0d18;
+  --color-surface: #1a1729;
+  --color-surface-2: #232037;
+  --color-line: #322c4a;
+  --color-gold: #d9b26a;
+  --color-gold-soft: #f2e0b6;
+  --color-plum: #6c4b9b;
+  --color-cream: #efecf8;
+  --color-muted: #a49ec2;
+
+  /* 한글 시스템 폰트 스택 — 웹폰트 다운로드 0 (TRD: 첫 로딩 3초 목표) */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard",
+    "Malgun Gothic", "맑은 고딕", "Noto Sans KR", system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    background-color: var(--color-ink);
+    color: var(--color-cream);
+    font-family: var(--font-sans);
+    /* 별빛 텍스처 — 이미지 없이 그라데이션으로 */
+    background-image:
+      radial-gradient(1px 1px at 12% 18%, rgb(255 255 255 / 0.5), transparent),
+      radial-gradient(1px 1px at 68% 8%, rgb(255 255 255 / 0.35), transparent),
+      radial-gradient(1.5px 1.5px at 84% 32%, rgb(255 255 255 / 0.4), transparent),
+      radial-gradient(1px 1px at 30% 62%, rgb(255 255 255 / 0.3), transparent),
+      radial-gradient(1px 1px at 92% 74%, rgb(255 255 255 / 0.3), transparent),
+      radial-gradient(700px 420px at 50% -8%, rgb(108 75 155 / 0.45), transparent);
+    background-attachment: fixed;
+  }
+
+  ::selection {
+    background: var(--color-gold);
+    color: var(--color-ink);
+  }
+}
+
+@utility card-surface {
+  background: linear-gradient(160deg, var(--color-surface) 0%, var(--color-surface-2) 100%);
+  border: 1px solid var(--color-line);
+}
+
+/* 카드 뒷면 — 골드 라인 + 격자 무늬 */
+@utility card-back {
+  background:
+    repeating-linear-gradient(45deg, rgb(217 178 106 / 0.07) 0 6px, transparent 6px 12px),
+    linear-gradient(160deg, #2a2342 0%, #171326 100%);
+  border: 1px solid rgb(217 178 106 / 0.45);
+  box-shadow: inset 0 0 0 3px rgb(217 178 106 / 0.12);
+}
+
+@keyframes float-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@utility float-in {
+  animation: float-in 0.45s ease-out both;
+}
