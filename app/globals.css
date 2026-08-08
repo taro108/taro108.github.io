@@ -70,3 +70,106 @@
 @utility float-in {
   animation: float-in 0.45s ease-out both;
 }
+
+/* ── 카드 뽑기 연출 ──────────────────────────────────────────────────────
+   부채꼴 배치(회전)는 인라인 style, 아래 연출은 그 안쪽 엘리먼트에 건다.
+   같은 엘리먼트에 겹치면 transform 이 서로를 덮어쓴다. */
+
+@utility stage-3d {
+  perspective: 900px;
+}
+
+/* 덱이 부채꼴로 펼쳐지며 등장 */
+@keyframes fan-deal {
+  from {
+    opacity: 0;
+    transform: translateY(64px) scale(0.82);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@utility fan-deal {
+  animation: fan-deal 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* 고른 카드가 뒤집히며 위 자리로 날아간다 */
+@keyframes card-launch {
+  0% {
+    opacity: 1;
+    transform: none;
+  }
+  40% {
+    opacity: 1;
+    transform: translateY(-56px) scale(1.15) rotateY(90deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-190px) scale(0.55) rotateY(180deg);
+  }
+}
+
+@utility card-launch {
+  animation: card-launch 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* 자리에 앞면이 열리며 놓인다 */
+@keyframes slot-flip {
+  from {
+    opacity: 0;
+    transform: rotateY(-100deg) scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@utility slot-flip {
+  animation: slot-flip 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* 세 장이 다 놓였을 때 '조언' 자리에 도는 금빛 */
+@keyframes advice-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgb(217 178 106 / 0);
+  }
+  50% {
+    box-shadow: 0 0 22px 2px rgb(217 178 106 / 0.45);
+  }
+}
+
+@utility advice-pulse {
+  animation: advice-pulse 1.6s ease-in-out 2;
+}
+
+/* 빈 자리에서 도는 숨 */
+@keyframes slot-idle {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@utility slot-idle {
+  animation: slot-idle 2.4s ease-in-out infinite;
+}
+
+@layer base {
+  /* 멀미·전정기관 이슈 — 연출은 전부 즉시 끝난 상태로 보여준다. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}

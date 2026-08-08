@@ -1,6 +1,7 @@
 # taro108
 
-타로 한 장을 뽑으면 그 기운에 맞는 **108염주 팔찌 · 합장주**를 추천하고 24시간 한정 특가로 파는 사이트.
+타로 세 장(상황 · 마음 · 조언)을 뽑으면 **조언 카드**의 기운에 맞는 **108염주 팔찌 · 합장주**를
+추천하고 24시간 한정 특가로 파는 사이트.
 
 - 기획: [PRD.md](PRD.md) · 설계: [TRD.md](TRD.md)
 - Next.js 16 (App Router) + Tailwind v4 + Supabase + Vercel. **월 고정비 0원**, 관리자 페이지 없음(Supabase Studio로 운영).
@@ -76,6 +77,8 @@ SDK 는 CDN 에서 SRI(`integrity`)로 고정해 받는다. 버전을 올리면 
 | 알고 싶은 것 | 파일 |
 |---|---|
 | 카드 22장 텍스트·원석 매핑 | `data/cards.ts` (단일 소스, DB에 없음) |
+| 3장 스프레드 자리·URL 파싱 | `lib/spread.ts` (+ `lib/spread.test.mts`) |
+| 부채꼴 뽑기 연출 | `app/tarot/page.tsx` + `app/globals.css` 하단 키프레임 |
 | DB 스키마 · RLS · 샘플 상품 | `data/seed.sql` |
 | 키 없을 때 뜨는 샘플 상품 18개 | `data/products.sample.ts` (seed.sql 과 같은 목록) |
 | 공유 버튼 · 카카오 SDK | `components/ShareButton.tsx` |
@@ -87,6 +90,10 @@ SDK 는 CDN 에서 SRI(`integrity`)로 고정해 받는다. 버전을 올리면 
 
 ## 알아둘 것
 
+- **스프레드 세 장 중 조언 카드만 URL path에 있다.** `/result/major-13-death?spread=16,17` —
+  앞 두 자리(상황·마음)는 쿼리로 따라올 뿐이고, 원석·특가·주문의 `tarot_card_id`·OG 이미지는
+  전부 path의 조언 카드가 정한다. 세 장을 다 path에 넣으면 조합이 9,240개라 OG 이미지를 못 굽는다.
+  쿼리가 없거나 망가지면 조용히 한 장 결과로 떨어져서, 예전에 공유된 링크도 그대로 열린다.
 - **특가는 서버에서 검증하지 않는다.** localStorage 조작으로 할인받는 경우가 생기지만, 할인폭
   10~15%는 방어 비용보다 싸다는 판단 (TRD §7). PG 결제를 붙이는 시점에 서버 검증으로 올린다.
 - **재고는 자동 차감되지 않는다.** 입금 확인 시 운영자가 Studio에서 직접 줄인다. 미입금 주문이

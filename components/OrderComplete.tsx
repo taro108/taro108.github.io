@@ -116,7 +116,7 @@ export default function OrderComplete({ orderNo }: { orderNo: string }) {
           href="/tarot"
           className="rounded-xl border border-line px-4 py-3 text-center text-sm text-muted"
         >
-          타로 한 장 더 뽑기
+          타로 다시 뽑기
         </Link>
       </div>
     </div>

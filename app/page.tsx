@@ -5,8 +5,8 @@ import ProductCard from '@/components/ProductCard'
 import { getProducts } from '@/lib/supabase'
 
 const STEPS = [
-  ['카드 한 장을 뽑고', '22장의 메이저 아르카나 중 마음이 가는 한 장을 고릅니다.'],
-  ['오늘의 기운을 읽고', '카드가 전하는 메시지와, 그 기운을 닮은 원석을 알려드려요.'],
+  ['카드 세 장을 뽑고', '지금의 상황 · 당신의 마음 · 오늘의 조언, 세 자리에 놓습니다.'],
+  ['오늘의 기운을 읽고', '세 장이 전하는 메시지와, 조언 카드가 가리키는 원석을 알려드려요.'],
   ['24시간 특가로', '추천 원석으로 만든 108염주·합장주를 타로 특가로 만나보세요.'],
 ]
 
@@ -24,7 +24,7 @@ export default async function Home() {
           <span className="text-gold-soft">108염주 · 합장주</span>
         </h1>
         <p className="mx-auto mt-4 max-w-xs text-sm leading-relaxed text-muted">
-          카드 한 장이 오늘의 기운을 읽어드립니다. 그 기운을 닮은 원석 염주를 24시간 특가로.
+          카드 세 장이 오늘의 기운을 읽어드립니다. 그 기운을 닮은 원석 염주를 24시간 특가로.
         </p>
 
         <div className="mx-auto mt-8 flex max-w-[260px] justify-center gap-3">

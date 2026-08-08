@@ -4,7 +4,7 @@ export const SITE = {
   name: '타로108',
   tagline: '오늘의 타로가 골라주는 108염주 · 합장주',
   description:
-    '타로 한 장을 뽑으면 그 기운에 맞는 108염주 팔찌와 합장주를 추천해 드립니다. 타로 특가 24시간 한정.',
+    '타로 세 장으로 오늘을 읽고, 조언 카드의 기운에 맞는 108염주 팔찌와 합장주를 추천해 드립니다. 타로 특가 24시간 한정.',
   url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://taro108.vercel.app',
 } as const
 
