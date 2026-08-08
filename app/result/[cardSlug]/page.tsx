@@ -19,7 +19,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const card = cardBySlug((await params).cardSlug)
   if (!card) return {}
   const title = `${card.nameKo} — 오늘의 타로`
-  const description = `${card.message.split('.')[0]}. ${stoneName(card.stone)}를 추천합니다.`
+  // 조사(을/를)는 받침에 따라 갈려서 '백수정를' 같은 문장이 공유 카드에 그대로 나간다.
+  // 판정 로직을 두는 대신 조사가 붙지 않는 문장으로 쓴다.
+  const description = `${card.message.split('.')[0]}. 추천 원석 — ${stoneName(card.stone)}`
   return { title, description, openGraph: { title, description } }
 }
 

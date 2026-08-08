@@ -60,7 +60,9 @@ create policy "anon insert orders" on orders
   );
 
 -- ── 샘플 상품 (운영자가 실제 상품으로 교체) ─────────────────────────────
+-- 원석 9종 × (108염주 팔찌 · 합장주) = 18개. 카드 22장이 어떤 원석을 뽑아도 둘 다 추천된다.
 -- images 를 비워두면 화면에서 원석 색 그라데이션으로 대체 렌더링된다.
+-- 앱의 data/products.sample.ts 와 같은 목록 — 한쪽만 고치지 말 것.
 insert into products (slug, name, category, stone, price, sale_price, stock, description) values
 ('br-clear-quartz','백수정 108염주 팔찌','bracelet108','clear-quartz',46000,40000,10,
  '맑은 백수정 108알을 한 줄로 엮은 손목 염주입니다. 어떤 기운에도 물들 수 있는 시작의 돌.'),
@@ -80,10 +82,23 @@ insert into products (slug, name, category, stone, price, sale_price, stock, des
  '단단한 흑요빛 오닉스 108알. 끊어내고 지켜주는 보호의 돌.'),
 ('br-amazonite','아마조나이트 108염주 팔찌','bracelet108','amazonite',47000,41000,10,
  '물빛 아마조나이트 108알. 치우침을 다스리는 조화의 돌.'),
-('hj-amethyst','자수정 합장주','hapjangju','amethyst',69000,60000,5,
- '두 손을 모을 때 손안에 꼭 들어오는 자수정 합장주입니다.'),
 ('hj-clear-quartz','백수정 합장주','hapjangju','clear-quartz',65000,57000,5,
  '맑은 백수정으로 엮은 합장주. 기도와 명상에 곁에 두기 좋습니다.'),
+('hj-citrine','시트린 합장주','hapjangju','citrine',72000,63000,5,
+ '손안에서 햇빛처럼 도는 시트린 합장주. 일이 풀리기를 바라는 날에.'),
+('hj-amethyst','자수정 합장주','hapjangju','amethyst',69000,60000,5,
+ '두 손을 모을 때 손안에 꼭 들어오는 자수정 합장주입니다.'),
+('hj-rose-quartz','로즈쿼츠 합장주','hapjangju','rose-quartz',66000,58000,5,
+ '분홍빛이 은은하게 도는 로즈쿼츠 합장주. 관계를 위한 기도에.'),
+('hj-tiger-eye','호안석 합장주','hapjangju','tiger-eye',68000,59000,4,
+ '결이 또렷한 호안석 합장주. 마음을 다잡아야 하는 날에.'),
+-- stock 0 — 품절 표시를 바로 확인하려고 일부러 비워 둔 샘플.
+('hj-lapis','라피스라줄리 합장주','hapjangju','lapis',78000,68000,0,
+ '밤하늘을 그대로 옮긴 라피스라줄리 합장주. 판단이 필요한 날에.'),
+('hj-garnet','가넷 합장주','hapjangju','garnet',74000,64000,4,
+ '깊은 붉은빛 가넷 합장주. 다시 힘을 내야 할 때 손에 쥐는 돌.'),
 ('hj-onyx','오닉스 합장주','hapjangju','onyx',62000,54000,5,
- '차분한 오닉스 합장주. 마음이 어수선한 날에.')
+ '차분한 오닉스 합장주. 마음이 어수선한 날에.'),
+('hj-amazonite','아마조나이트 합장주','hapjangju','amazonite',67000,58000,5,
+ '물빛 아마조나이트 합장주. 한쪽으로 기울어진 마음을 고르게.')
 on conflict (slug) do nothing;
