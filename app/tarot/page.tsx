@@ -11,8 +11,10 @@ import CardFace from '@/components/CardFace'
 // 좌우 여백까지 쓴다. 각도를 더 벌리면 끝 카드부터 잘리기 시작한다.
 const ARC_ORIGIN = 340
 const ARC_STEP = 2.2
-/** card-launch 키프레임 길이와 맞춰야 카드가 사라지는 순간이 어긋나지 않는다. */
-const LAUNCH_MS = 600
+/** globals.css 의 card-launch 길이와 맞춰야 카드가 사라지는 순간이 어긋나지 않는다. */
+const LAUNCH_MS = 360
+/** 세 장이 다 놓인 뒤 결과로 넘어가기까지 — 마지막 카드가 열리는 걸 볼 만큼만 둔다. */
+const REVEAL_MS = 900
 
 /** 뽑기 결과는 카드의 위치가 아니라 난수로 정한다 (TRD §7). 이미 나온 카드는 빼고 뽑는다. */
 function drawFrom(exclude: Card[]): Card {
@@ -37,7 +39,7 @@ export default function TarotPage() {
     const rest = buildSpreadParam(picked.slice(0, SPREAD_SIZE - 1).map((c) => c.id))
     const id = setTimeout(
       () => router.push(`/result/${advice.slug}?${SPREAD_PARAM}=${rest}`),
-      1600,
+      REVEAL_MS,
     )
     return () => clearTimeout(id)
   }, [done, picked, router])
@@ -125,14 +127,14 @@ export default function TarotPage() {
               disabled={done || launching !== null}
               onClick={() => pick(fanIndex)}
               aria-label={`${i + 1}번째 카드 뽑기`}
-              className="group absolute top-3 left-1/2 -ml-8 w-16 transition-transform duration-500 ease-out focus:outline-none disabled:cursor-default"
+              className="group absolute top-3 left-1/2 -ml-8 w-16 transition-transform duration-300 ease-out focus:outline-none disabled:cursor-default"
               style={{ transform: `rotate(${angle}deg)`, transformOrigin: `50% ${ARC_ORIGIN}px` }}
             >
               <span
                 className={`block ${launching === fanIndex ? 'card-launch' : 'fan-deal'}`}
-                style={launching === fanIndex ? undefined : { animationDelay: `${i * 28}ms` }}
+                style={launching === fanIndex ? undefined : { animationDelay: `${i * 14}ms` }}
               >
-                <span className="card-back flex aspect-[2/3] items-center justify-center rounded-lg transition-transform duration-300 ease-out group-enabled:group-hover:-translate-y-6 group-enabled:group-focus-visible:-translate-y-6">
+                <span className="card-back flex aspect-[2/3] items-center justify-center rounded-lg transition-transform duration-200 ease-out group-enabled:group-hover:-translate-y-6 group-enabled:group-focus-visible:-translate-y-6">
                   <span className="text-xl text-gold/45">✷</span>
                 </span>
               </span>

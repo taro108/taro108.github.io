@@ -92,7 +92,7 @@
 }
 
 @utility fan-deal {
-  animation: fan-deal 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: fan-deal 0.34s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 /* 고른 카드가 뒤집히며 위 자리로 날아간다 */
@@ -111,8 +111,9 @@
   }
 }
 
+/* 길이를 바꾸면 app/tarot/page.tsx 의 LAUNCH_MS 도 같이 바꿔야 한다. */
 @utility card-launch {
-  animation: card-launch 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: card-launch 0.36s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 /* 자리에 앞면이 열리며 놓인다 */
@@ -128,7 +129,7 @@
 }
 
 @utility slot-flip {
-  animation: slot-flip 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: slot-flip 0.34s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 /* 세 장이 다 놓였을 때 '조언' 자리에 도는 금빛 */
@@ -142,8 +143,9 @@
   }
 }
 
+/* 결과로 넘어가기 전에 한 번은 끝나야 해서 이동 대기(900ms)보다 짧게 둔다. */
 @utility advice-pulse {
-  animation: advice-pulse 1.6s ease-in-out 2;
+  animation: advice-pulse 0.8s ease-in-out 1;
 }
 
 /* 빈 자리에서 도는 숨 */
